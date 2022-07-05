@@ -8,3 +8,4 @@
 * ReactJS
 * MaterialUI
 * Redux
+* Firebase ( Autenticación y base de datos )

@@ -1,31 +1,34 @@
-import { Grid, Typography } from "@mui/material"
-import PropTypes from 'prop-types';
+import { Typography } from "@mui/material"
+import Grid from '@mui/material/Grid';
 
 
-export const AuthLayout = ({ children, title='' }) => {
+
+export const AuthLayout = ({ children, title = ' ' }) => {
     return (
         <Grid
             container
-            spacin={0}
+            spacing={0}
             direction="column"
             alignItems="center"
             justifyContent="center"
             sx={{ minHeight: '100vh', backgroundColor: 'primary.main', pt: 4 }}
         >
-            <Grid
+            <Grid item
                 className='box-shadow'
-                xs={8} md={3}
-                sx={{ backgroundColor: 'white', padding: 3, borderRadius: 2 }}
-            >
-                <Typography variant='h5' sx={{ mb: 1 }}>{ title }</Typography>
+                xs={3}
+                sx={{
+                    width: { sm: 450 },
+                    backgroundColor: 'white',
+                    padding: 3,
+                    borderRadius: 2,
+                    margin: '25px'
+                }}>
+                <Typography variant='h5' sx={{ mb: 1 }}>{title}</Typography>
 
-                { children }
+                {children}
 
             </Grid>
         </Grid>
     )
 }
 
-AuthLayout.propTypes = {
-    tile: PropTypes.string.isRequired,
-}
