@@ -41,7 +41,7 @@ export const registerUserWithEmailPassWord = async ({ email, password, displayNa
             uid, photoURL, email, displayName
         }
     } catch (error) {
-        console.log(error)
-        return { ok: false, errorMessage: error.message }
+        console.error( error)
+        return { ok: false, errorMessage: 'Error enel servidor contacte con al administrador de sistemas' }
     }
 }
