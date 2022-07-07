@@ -1,5 +1,5 @@
 import { alertClasses } from "@mui/material";
-import { signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from "firebase/auth";
 import { FirebaseAuth } from "./config";
 
 const googleProvider = new GoogleAuthProvider;
@@ -33,7 +33,7 @@ export const registerUserWithEmailPassWord = async ({ email, password, displayNa
         const resp = await createUserWithEmailAndPassword(FirebaseAuth, email, password);
         const { uid, photoURL } = resp.user;
         //UPDATE DISPLAYNAME IN FIEREBASE
-        await updateProfile(FirebaseAuth.currentUser, { displayName});
+        await updateProfile(FirebaseAuth.currentUser, { displayName });
 
 
         return {
@@ -41,7 +41,24 @@ export const registerUserWithEmailPassWord = async ({ email, password, displayNa
             uid, photoURL, email, displayName
         }
     } catch (error) {
-        console.error( error)
-        return { ok: false, errorMessage: 'Error enel servidor contacte con al administrador de sistemas' }
+        console.error(error)
+        return { ok: false, errorMessage: 'Registro: Error en el servidor contacte con al administrador de sistemas' }
+    }
+}
+
+
+export const loginWithEmailPassword = async ({ email, password }) => {
+    try {
+        const resp = await signInWithEmailAndPassword(FirebaseAuth, email, password);
+        const { uid, displayName, photoURL } = resp.user
+        return {
+            ok: true,
+            uid, displayName, photoURL, email
+        }
+    } catch (error) {
+        console.error(error)
+        return {
+            ok: false, errorMessage: 'Login: Datos de login incorrectos'
+        }
     }
 }

@@ -1,33 +1,36 @@
 import { Google } from "@mui/icons-material";
 import { Link as RouterLink } from 'react-router-dom';
-import { Button, Grid, TextField, Typography, Link } from "@mui/material";
+import { Button, Grid, TextField, Typography, Link, Alert } from "@mui/material";
 import { AuthLayout } from "../layout/AuthLayout";
 import { useForm } from '../../hooks';
 import { useDispatch, useSelector } from "react-redux";
-import { checkingAuthenticacion, startGoogleSignIn } from "../../store/auth/";
+import { checkingAuthenticacion, startGoogleSignIn, startLoginWithEmailpassword } from "../../store/auth/";
 import { useMemo } from "react";
+
+
 export const LoginPage = () => {
 
-  const { status } = useSelector(state => state.auth)
+  const { status, errorMessage } = useSelector(state => state.auth)
 
   const dispatch = useDispatch();
 
-  const { email, password, onInputChange } = useForm({
-    email: 'alex@google.com',
-    password: '123455'
+  const { email, password, onInputChange, formState } = useForm({
+    email: '',
+    password: ''
 
   });
 
-  const isAuthenticating = useMemo(() => status === 'checking', [status])
+  const isAuthenticating = useMemo(() => status === 'checking' ? true : false, [status])
 
   const onSubmit = (event) => {
     event.preventDefault();
-    dispatch(checkingAuthenticacion());
+    dispatch(startLoginWithEmailpassword(formState));
   }
 
   const onGoogleSignIn = () => {
-    dispatch(startGoogleSignIn())
+    dispatch(startGoogleSignIn());
   }
+
 
   return (
 
@@ -63,6 +66,14 @@ export const LoginPage = () => {
 
           </Grid>
           <Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
+            <Grid item
+              xs={12}
+              display={!!errorMessage ? '' : 'none'}
+            >
+              <Alert severity="error">
+                {errorMessage}
+              </Alert>
+            </Grid>
             <Grid item
               xs={12} sm={6}
             >
