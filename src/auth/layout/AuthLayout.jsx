@@ -6,6 +6,7 @@ import Grid from '@mui/material/Grid';
 export const AuthLayout = ({ children, title = ' ' }) => {
     return (
         <Grid
+            className="animate__animated animate__fadeIn"
             container
             spacing={0}
             direction="column"
@@ -14,7 +15,7 @@ export const AuthLayout = ({ children, title = ' ' }) => {
             sx={{ minHeight: '100vh', backgroundColor: 'primary.main', pt: 4 }}
         >
             <Grid item
-                className='box-shadow'
+                className='box-shadow  animate__animated animate__fadeInLeft'
                 xs={3}
                 sx={{
                     width: { sm: 450 },
