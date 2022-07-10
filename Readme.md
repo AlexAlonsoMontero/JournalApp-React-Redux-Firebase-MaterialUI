@@ -21,6 +21,7 @@ Aplicación que funcionará como  un registro diario, donde podremos gestionar n
 * MaterialUI
 * Redux
 * Firebase ( Autenticación y base de datos )
+* SweetAlert2
 
 
 # Instalación

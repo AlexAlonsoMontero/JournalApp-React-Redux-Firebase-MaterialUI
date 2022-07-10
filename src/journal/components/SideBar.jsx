@@ -1,11 +1,13 @@
 import { TurnedInNot } from "@mui/icons-material"
 import { Box, Drawer, Toolbar, Divider, List, ListItem, ListItemButton, ListItemIcon, Grid, ListItemText, Typography, } from "@mui/material"
 import { useSelector } from "react-redux"
+import { SiteBarItem } from "./SiteBarItem";
 
 export const SideBar = ({ drawerWidth }) => {
 
-    const { displayName } = useSelector(state=>state.auth)
-    
+    const { displayName } = useSelector(state => state.auth);
+    const { notes } = useSelector(state => state.journal);
+
     return (
         <Box
             component='nav'
@@ -21,28 +23,16 @@ export const SideBar = ({ drawerWidth }) => {
             >
                 <Toolbar  >
                     <Typography variant='h6' noWrap component='div'>
-                        { displayName }
+                        {displayName}
                     </Typography>
                 </Toolbar>
                 <Divider />
                 <List>
-                    
+
                     {
-                        ['Enero', 'Febrero', 'Marzo', 'Abril'].map(text => {
-                            return(
-                            <ListItem key={text} disablePadding >
-                                <ListItemButton>
-                                    <ListItemIcon>
-                                        <TurnedInNot />
-                                    </ListItemIcon>
-                                    <Grid container >
-                                      <ListItemText primary={ text }/>
-                                      <ListItemText secondary='Enim enim voluptate exercitation reprehenderit laborum et.'/>
-                                    </Grid>
-                                </ListItemButton>
-                            </ListItem>
-                            )
-                        })
+                        notes.map(note => (
+                            <SiteBarItem key={note.id} {...note} />
+                        ))
                     }
                 </List>
 
