@@ -1,8 +1,8 @@
 import { async } from "@firebase/util";
-import { collection, doc, setDoc } from "firebase/firestore/lite";
+import { collection, deleteDoc, doc, setDoc } from "firebase/firestore/lite";
 import { FirbaseDB } from "../../firebase/config";
-import { loadNotes } from "../../helpers";
-import { addNewEmptyNote, setActiveNote, savingNewNote, setNotes, setSaving, updateNote } from "./journalSlice";
+import { fileUpload, loadNotes } from "../../helpers";
+import { addNewEmptyNote, setActiveNote, savingNewNote, setNotes, setSaving, updateNote, setPhotosToActivateNote, deleteNoteById } from "./journalSlice";
 
 export const startNewNote = () => {
     return async (dispatch, getState) => {
@@ -56,6 +56,33 @@ export const startSaveNote = () => {
         //Merge si hay campos en firestore que no están en  nuestra nota, se mantienenen
         const save = await setDoc(docRef, noteToFirestore, {merge: true})
         dispatch (updateNote( note))
+
+    }
+}
+
+export const startUploadingFiles = (files = []) => {
+    return async(dispatch)=>{
+        dispatch ( setSaving );
+        const fileUploadPromises = [];
+        for (const file of files) {
+            fileUploadPromises.push( fileUpload( file ))
         
+        }
+        
+        const photosUrls = await Promise.all( fileUploadPromises );
+
+        dispatch( setPhotosToActivateNote ( photosUrls))
+
+    }
+}
+
+export const startDeletingNote = () => {
+    return async ( dispatch, getState)=>{
+        const { uid } = getState().auth;
+        const { active: note} = getState().journal;
+        const docRef = doc(FirbaseDB, `${uid}/journal/notes/${note.id}` );
+        const resp = await deleteDoc( docRef);
+        dispatch( deleteNoteById(note.id))
+
     }
 }
