@@ -47,12 +47,12 @@ export const NoteView = () => {
     const onFileInputChange = ({ target }) => {
         if (target.files === 0) return;
 
-        dispatch ( startUploadingFiles ( target.files ) );
+        dispatch(startUploadingFiles(target.files));
 
     }
 
     const onDelete = () => {
-        dispatch( startDeletingNote() );
+        dispatch(startDeletingNote());
     }
 
     return (
@@ -115,15 +115,15 @@ export const NoteView = () => {
 
             <Grid container justifyContent='end'>
                 <Button
-                    onClick={ onDelete }
-                    sx={{ mt:2 }}
+                    onClick={onDelete}
+                    sx={{ mt: 2 }}
                     color="error"
                 >
                     <DeleteOutline />
                 </Button>
             </Grid>
-            {/* image galler */}
-            <ImageGalery images ={ note.imageUrls } />
+                <ImageGalery images={note.imageUrls} />
+
         </Grid>
     )
 }
