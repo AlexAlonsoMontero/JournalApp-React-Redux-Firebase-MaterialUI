@@ -6,7 +6,7 @@ import { v2 as cloudinary } from 'cloudinary';
     cloudinary.config({
         cloud_name:process.env.CLOUD_NAME,
         api_key: process.env.CLOUD_API_KEY,
-        api_secret: process.env.CLOUD_SECRET,
+        api_secret: process.env.CLOUD_API_SECRET,
         secure: true
     })
 }
@@ -15,6 +15,7 @@ import { v2 as cloudinary } from 'cloudinary';
 describe('Pruebas en fileUpload', ()=>{
     test('Debe subir el archivo correctamente a cloudinary',async()=>{
         const imageUrl = 'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989_960_720.jpg';
+
 
         const resp = await fetch(imageUrl)
         const blob = await resp.blob();
@@ -27,7 +28,6 @@ describe('Pruebas en fileUpload', ()=>{
         //BORRADO DE FICHERO
         const segments = url.split('/');
         const imagId = segments [ segments.length -1].replace('.jpg','');
-        console.log(imagId)
         try {
             await cloudinary.api.delete_resources(['journal-app/' + imagId]);
 
