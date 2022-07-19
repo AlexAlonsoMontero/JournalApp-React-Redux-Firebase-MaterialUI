@@ -1,0 +1,45 @@
+import { fileUpload } from "../../src/helpers/fileUpload";
+import { v2 as cloudinary } from 'cloudinary';
+
+
+{
+    cloudinary.config({
+        cloud_name:process.env.CLOUD_NAME,
+        api_key: process.env.CLOUD_API_KEY,
+        api_secret: process.env.CLOUD_SECRET,
+        secure: true
+    })
+}
+
+
+describe('Pruebas en fileUpload', ()=>{
+    test('Debe subir el archivo correctamente a cloudinary',async()=>{
+        const imageUrl = 'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989_960_720.jpg';
+
+        const resp = await fetch(imageUrl)
+        const blob = await resp.blob();
+
+        const file= new File([blob],'testimage.jpg');
+
+        const url = await fileUpload(file);
+        expect(typeof url).toBe('string');
+
+        //BORRADO DE FICHERO
+        const segments = url.split('/');
+        const imagId = segments [ segments.length -1].replace('.jpg','');
+        console.log(imagId)
+        try {
+            await cloudinary.api.delete_resources(['journal-app/' + imagId]);
+
+        } catch (error) {
+            console.log(error)
+        }
+
+    });
+    test ('debe retornal null?',async()=>{
+        const file = new File([], 'testing.jpg');
+        const url = await fileUpload( file );
+        expect( url ).toBe( null );
+    });
+    
+})
