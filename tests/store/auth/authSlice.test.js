@@ -42,10 +42,11 @@ describe('Pruebas en authSlice', () => {
             photoURL: null,
             errorMessage:errorMessage
         })
-     })
+     });
      test('debe de cambiar el estado a checking',()=>{
         const state = authSlice.reducer(authenticatedState,checkingCredentials())
         expect( state.status ).toBe('checking')
-     })
+     });
+     
 });
 

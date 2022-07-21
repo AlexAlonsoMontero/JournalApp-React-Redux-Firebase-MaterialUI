@@ -1,16 +1,15 @@
 import { fileUpload } from "../../src/helpers/fileUpload";
 import { v2 as cloudinary } from 'cloudinary';
-
-
 {
     cloudinary.config({
-        cloud_name:process.env.CLOUD_NAME,
-        api_key: process.env.CLOUD_API_KEY,
-        api_secret: process.env.CLOUD_API_SECRET,
+        cloud_name:'imgalex',
+        api_key: '955293821819719',
+        api_secret: 'lCU4tfeNg_Py-NnZMpGTYQIRXMo',
         secure: true
     })
 }
 
+//TODO Ver funcionamiento de variables de entorno y el testing
 
 describe('Pruebas en fileUpload', ()=>{
     test('Debe subir el archivo correctamente a cloudinary',async()=>{
