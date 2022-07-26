@@ -2,12 +2,13 @@ import { fileUpload } from "../../src/helpers/fileUpload";
 import { v2 as cloudinary } from 'cloudinary';
 {
     cloudinary.config({
-        cloud_name:'imgalex',
-        api_key: '955293821819719',
-        api_secret: 'lCU4tfeNg_Py-NnZMpGTYQIRXMo',
+        cloud_name:process.env.VITE_CLOUD_NAME,
+        api_key: process.env.VITE_CLOUD_API_KEY,
+        api_secret: process.env.VITE_CLOUD_API_SECRET,
         secure: true
     })
 }
+
 
 //TODO Ver funcionamiento de variables de entorno y el testing
 
