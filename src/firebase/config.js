@@ -7,28 +7,36 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from 'firebase/auth';
 //base de datos
 import { getFirestore } from 'firebase/firestore/lite';
+import { getEnviroments } from "../helpers/getEnviroments";
 
-
+const {
+    VITE_FIREBASE_APIKEY,
+    VITE_FIREBASE_AUTHDOMAIN,
+    VITE_FIREBASE_PROJECTID,
+    VITE_FIREBASE_STORAGEBUCKET,
+    VITE_FIREBASE_MESSAGINGSENDERID,
+    VITE_FIREBASEAPP_ID
+} = getEnviroments()
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyDntp3ougvwB5hpYyqZfcjGZDAbESmoHyk",
-    authDomain: "react-journal-app-b7b06.firebaseapp.com",
-    projectId: "react-journal-app-b7b06",
-    storageBucket: "react-journal-app-b7b06.appspot.com",
-    messagingSenderId: "600217576797",
-    appId: "1:600217576797:web:b3ce356916803c8e14b4b4"
+    apiKey: VITE_FIREBASE_APIKEY,
+    authDomain: VITE_FIREBASE_AUTHDOMAIN,
+    projectId: VITE_FIREBASE_PROJECTID,
+    storageBucket: VITE_FIREBASE_STORAGEBUCKET,
+    messagingSenderId: VITE_FIREBASE_MESSAGINGSENDERID,
+    appId: VITE_FIREBASEAPP_ID
 };
 
 //TESTING
 // const firebaseConfig = {
 
-//     apiKey: "AIzaSyDz-Y0-ECcsrC5gRO32ykh8BaJBfJbrCR0",
-//     authDomain: "testjournalapp-e21c9.firebaseapp.com",
-//     projectId: "testjournalapp-e21c9",
-//     storageBucket: "testjournalapp-e21c9.appspot.com",
-//     messagingSenderId: "44709569489",
-//     appId: "1:44709569489:web:04b82c8c04aec4da1bb6f0"
+//     apiKey: VITE_FIREBASE_APIKEY,
+//     authDomain: VITE_FIREBASE_AUTHDOMAIN,
+//     projectId: VITE_FIREBASE_PROJECTID,
+//     storageBucket: VITE_FIREBASE_STORAGEBUCKET,
+//     messagingSenderId: VITE_FIREBASE_MESSAGINGSENDERID,
+//     appId: VITE_FIREBASEAPP_ID
 
 // };
 
