@@ -1,7 +1,5 @@
 # JournalApp
 
-<strong>APLICACIÓN EN DESARROLLO</strong>
-
 Aplicación que funcionará como un registro diario, donde podremos gestionar notas con imágenes, se usara ReactJS (Redux), Firebase y Firestone.
 
 - Darnos de alta como usarios:
@@ -33,3 +31,9 @@ npm install
 ```
 
 Congiruación de Firebase en "src/firebase/config.js", pasado el tiempo es posible que borre los datos de firesbase, por lo que tendrías que configurar el tuyo.
+
+# Usuario de pruebas para no registrarse
+```
+login: userpruebas4@userpruebas4.com
+pass: userpruebas4
+```
